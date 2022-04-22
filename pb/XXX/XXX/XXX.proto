@@ -15,6 +15,7 @@ message HealthcheckRequest {
   };
   
   string msg = 1;
+  repeated int32 msgint = 2;
 }
 
 message HealthcheckResponse {
