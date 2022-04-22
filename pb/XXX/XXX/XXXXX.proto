@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package XXX.XXX;
+
+import "google/api/annotations.proto";
+
+import "validate/validate.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message HealthcheckRequest {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example: "{\"msg\": \"heathcheck\"}"
+    };
+
+    string msg = 1;
+}
+
+message HealthcheckResponse {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example: "{\"result\": \"ok\"}"
+    };
+
+    string result = 1;
+}
+
+message HelloRequest {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example: "{\"msg\": \"hello world\"}"
+    };
+
+    string msg = 1;
+}
+
+message HelloReply {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    example: "{\"msg\": \"hello world from server\", \"code\":\"0\"}"
+    };
+
+    string msg = 1;
+    string code = 2;
+}
+
+service XXXXX {
+  rpc Heathcheck(HealthcheckRequest) returns (HealthcheckResponse) {
+    option (google.api.http) = {
+      get: "/api/healthcheck"
+    };
+  }
+  rpc Helloworld(HelloRequest) returns (HelloReply) {
+    option (google.api.http) = {
+      post: "/api/helloworld"
+      body: "*"
+    };
+  }
+}
